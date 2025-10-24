@@ -1,0 +1,16 @@
+{
+  "name": "express_server",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "my first server nodejs express",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "JuanDa72",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0"
+  }
+}

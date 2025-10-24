@@ -1,0 +1,546 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrega 01 - Proyecto Integrador</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
+        body {
+            font-family: 'Lato', sans-serif;
+            overflow: hidden;
+            background-color: #f1f5f9; /* bg-slate-100 */
+        }
+        .slide-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        .slide {
+            position: absolute;
+            top: 3rem;
+            left: 3rem;
+            right: 3rem;
+            bottom: 3rem;
+            width: auto;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+            opacity: 0;
+            transform: scale(0.95);
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+            overflow-y: auto; /* Para diapositivas con mucho contenido */
+        }
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 1;
+        }
+        .slide-content {
+            max-width: 1200px;
+            width: 100%;
+        }
+        .nav-button {
+            position: fixed;
+            bottom: 2rem;
+            background-color: rgba(26, 58, 110, 0.9);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.25);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .nav-button:hover {
+            background-color: #2758a1;
+            transform: translateY(-2px);
+        }
+        #prevBtn {
+            left: 2rem;
+        }
+        #nextBtn {
+            right: 2rem;
+        }
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background-color: #2758a1;
+            z-index: 20;
+            transition: width 0.3s ease;
+        }
+        /* Estilos para el diagrama de arquitectura */
+        .arch-box {
+            background-color: #f3f4f6;
+            border: 2px solid #d1d5db;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .arch-arrow {
+            font-size: 2.5rem;
+            color: #3b82f6;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body class="bg-slate-100">
+
+    <div class="progress-bar" id="progressBar"></div>
+
+    <div class="slide-container">
+        <!-- Slide 1: Portada -->
+        <section id="slide1" class="slide active p-0 overflow-hidden">
+            <div class="slide-content w-full h-full max-w-none">
+                <div class="grid grid-cols-1 md:grid-cols-5 w-full h-full">
+                    <!-- Columna Izquierda -->
+                    <div class="col-span-2 bg-gray-800 text-white flex flex-col justify-center items-center p-12 text-center">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Logotipo_de_la_Universidad_Nacional_de_Colombia.svg/1200px-Logotipo_de_la_Universidad_Nacional_de_Colombia.svg.png" alt="Logo UNAL" class="w-32 invert brightness-0">
+                        <div class="mt-8 border-t border-gray-600 w-2/3"></div>
+                        <h5 class="mt-8 text-xl font-semibold text-gray-300">Sistemas de Información</h5>
+                        <p class="mt-2 text-gray-400">23 de octubre de 2025</p>
+                    </div>
+                    <!-- Columna Derecha -->
+                    <div class="col-span-3 flex flex-col justify-center p-16">
+                         <h1 class="text-5xl font-black text-gray-800 leading-tight">Entrega 01: Proyecto Integrador</h1>
+                         <h2 class="text-3xl font-bold text-blue-700 mt-4">Core Talent Genesis</h2>
+                         <div class="mt-12">
+                            <p class="text-lg text-gray-500">Presentado por:</p>
+                            <p class="text-xl font-semibold mt-1 text-gray-900">Juan David Cruz Giraldo</p>
+                            <p class="text-xl font-semibold mt-1 text-gray-900">Maria Sofia Jimenez Hernandez</p>
+                            <p class="text-xl font-semibold mt-1 text-gray-900">Daniel Alonso Gracia Pinto</p>
+                            <p class="text-xl font-semibold mt-1 text-gray-900">David Alejandro Herrera Novoa</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 2: Empresa Seleccionada -->
+        <section id="slide2" class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-black text-gray-800 text-center mb-12">Empresa Seleccionada</h2>
+                <div class="bg-white p-10 rounded-lg shadow-xl text-center mb-12">
+                    <h3 class="text-5xl font-bold text-blue-900">AutoMás Ltda.</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                        <i class="fas fa-car text-4xl text-blue-600 mb-4"></i>
+                        <h4 class="text-xl font-bold">Sector</h4>
+                        <p class="text-gray-700">Servicios automotrices y tecnológicos (Inspección, peritaje, trámites).</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                        <i class="fas fa-users text-4xl text-blue-600 mb-4"></i>
+                        <h4 class="text-xl font-bold">Tamaño</h4>
+                        <p class="text-gray-700">Empresa grande, con un promedio de 700 empleados.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                        <i class="fas fa-sitemap text-4xl text-blue-600 mb-4"></i>
+                        <h4 class="text-xl font-bold">Área a Intervenir</h4>
+                        <p class="text-gray-700">Gestión del Talento Humano (aprox. 10 colaboradores).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 3: Identificación de la Necesidad -->
+        <section id="slide3" class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-black text-gray-800 text-center mb-12">Identificación de la Necesidad</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-xl h-full border-l-4 border-blue-500">
+                        <h3 class="text-2xl font-bold text-blue-900 mb-4"><i class="fas fa-clipboard-list mr-2"></i>Situación Actual</h3>
+                        <ul class="list-disc list-inside space-y-3 text-lg text-gray-700">
+                            <li>Uso de herramientas <strong>aisladas y no integradas</strong>.</li>
+                            <li>Dependencia de <strong>Google Sheets, Forms y correos</strong>.</li>
+                            <li>Información distribuida en múltiples archivos.</li>
+                            <li>Procesos gestionados de forma independiente.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-xl h-full border-l-4 border-red-500">
+                        <h3 class="text-2xl font-bold text-red-700 mb-4"><i class="fas fa-exclamation-triangle mr-2"></i>La Problemática</h3>
+                        <ul class="list-disc list-inside space-y-3 text-lg text-gray-700">
+                            <li><strong>Duplicidad</strong> de registros.</li>
+                            <li><strong>Pérdida de trazabilidad</strong> documental.</li>
+                            <li><strong>Retrasos</strong> en flujos de aprobación.</li>
+                            <li>Limitaciones para generar <strong>reportes confiables</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Procesos Actuales -->
+        <section id="slide4" class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-black text-gray-800 text-center mb-12">Procesos Actuales: Flujo Manual</h2>
+                <p class="text-center text-xl text-gray-600 mb-8">El ciclo de vida del empleado se gestiona en 5 procesos manuales, desconectados y dependientes de hojas de cálculo.</p>
+                <div class="grid grid-cols-5 gap-4 text-center">
+                    <div class="bg-gray-100 p-6 rounded-lg"><p class="text-lg font-semibold"><i class="fas fa-user-plus text-blue-600 mb-2 text-2xl"></i><br>Selección</p></div>
+                    <div class="bg-gray-100 p-6 rounded-lg"><p class="text-lg font-semibold"><i class="fas fa-file-signature text-blue-600 mb-2 text-2xl"></i><br>Contratación</p></div>
+                    <div class="bg-gray-100 p-6 rounded-lg"><p class="text-lg font-semibold"><i class="fas fa-shoe-prints text-blue-600 mb-2 text-2xl"></i><br>Inducción</p></div>
+                    <div class="bg-gray-100 p-6 rounded-lg"><p class="text-lg font-semibold"><i class="fas fa-bell text-blue-600 mb-2 text-2xl"></i><br>Novedades</p></div>
+                    <div class="bg-gray-100 p-6 rounded-lg"><p class="text-lg font-semibold"><i class="fas fa-user-minus text-blue-600 mb-2 text-2xl"></i><br>Desvinculación</p></div>
+                </div>
+                <div class="mt-8 bg-white p-4 rounded-lg shadow-xl">
+                    <img src="https://placehold.co/1000x400/f3f4f6/3730a3?text=Diagrama+General+del+Flujo+Actual+(Manual)" alt="Diagrama de Flujo Manual" class="rounded-lg w-full h-auto">
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Stakeholders Clave -->
+        <section id="slide5" class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-black text-gray-800 text-center mb-12">Stakeholders Involucrados</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                        <i class="fas fa-user-tie text-4xl text-blue-600 mb-4"></i>
+                        <h4 class="text-xl font-bold">Dirección / Gerencia</h4>
+                        <p class="text-gray-700">Necesitan datos confiables para decisiones estratégicas y auditorías.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                        <i class="fas fa-user-cog text-4xl text-blue-600 mb-4"></i>
+                        <h4 class="text-xl font-bold">Analistas de T.H.</h4>
+                        <p class="text-gray-700">Usuarios operativos principales. Buscan simplificar tareas y reducir errores.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                        <i class="fas fa-building text-4xl text-blue-600 mb-4"></i>
+                        <h4 class="text-xl font-bold">Líderes de Sede</h4>
+                        <p class="text-gray-700">Reportan vacantes y novedades. Requieren un sistema ágil y estructurado.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                        <i class="fas fa-calculator text-4xl text-blue-600 mb-4"></i>
+                        <h4 class="text-xl font-bold">Contabilidad / Nómina</h4>
+                        <p class="text-gray-700">Dependen de datos exactos para liquidaciones y pagos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: La Solución: "Core Talent Genesis" -->
+        <section id="slide6" class="slide">
+            <div class="slide-content text-center">
+                <h2 class="text-4xl font-black text-gray-800 text-center mb-6">La Solución Propuesta</h2>
+                <h3 class="text-5xl font-bold text-blue-900">Core Talent Genesis</h3>
+                <p class="text-2xl text-gray-600 mt-8 max-w-4xl mx-auto">
+                    Un sistema de información unificado para gestionar de manera <strong>integrada, ágil y confiable</strong> el ciclo de vida del empleado.
+                </p>
+                <div class="mt-10 bg-blue-50 p-8 rounded-lg">
+                    <h4 class="text-xl font-bold text-blue-800">Justificación del Módulo</h4>
+                    <p class="text-lg text-gray-700 mt-2 max-w-3xl mx-auto">
+                        Es el módulo más crítico. Responde a la necesidad urgente de <strong>centralizar, ordenar y asegurar</strong> la información del recurso humano, estableciendo las bases para la transformación digital de AutoMás.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Objetivos del Sistema (1/2) -->
+        <section id="slide7" class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-black text-gray-800 text-center mb-12">Objetivos Específicos (1/2)</h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="space-y-6">
+                        <div class="bg-white border-l-4 border-blue-500 p-6 rounded-lg flex items-center shadow-lg">
+                            <i class="fas fa-database text-3xl text-blue-600 mr-6"></i>
+                            <p class="text-xl"><strong>Centralizar la información</strong> del personal en una base de datos unificada y segura (Fuente Única de Verdad).</p>
+                        </div>
+                        <div class="bg-white border-l-4 border-blue-500 p-6 rounded-lg flex items-center shadow-lg">
+                            <i class="fas fa-check-double text-3xl text-blue-600 mr-6"></i>
+                            <p class="text-xl"><strong>Estandarizar los procesos</strong> de registro, actualización y consulta con formularios uniformes y validaciones.</p>
+                        </div>
+                        <div class="bg-white border-l-4 border-blue-500 p-6 rounded-lg flex items-center shadow-lg">
+                            <i class="fas fa-history text-3xl text-blue-600 mr-6"></i>
+                            <p class="text-xl"><strong>Implementar la trazabilidad</strong> documental y de eventos laborales (contratos, modificaciones, retiros).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: Objetivos del Sistema (2/2) -->
+        <section id="slide8" class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-black text-gray-800 text-center mb-12">Objetivos Específicos (2/2)</h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="space-y-6">
+                        <div class="bg-white border-l-4 border-blue-500 p-6 rounded-lg flex items-center shadow-lg">
+                            <i class="fas fa-chart-bar text-3xl text-blue-600 mr-6"></i>
+                            <p class="text-xl"><strong>Facilitar la generación de reportes</strong> e indicadores operativos para sustentar decisiones con datos medibles.</p>
+                        </div>
+                        <div class="bg-white border-l-4 border-blue-500 p-6 rounded-lg flex items-center shadow-lg">
+                            <i class="fas fa-headset text-3xl text-blue-600 mr-6"></i>
+                            <p class="text-xl"><strong>Mejorar la eficiencia</strong> de comunicación entre las sedes y el área central, reduciendo tiempos de respuesta.</p>
+                        </div>
+                        <div class="bg-white border-l-4 border-blue-500 p-6 rounded-lg flex items-center shadow-lg">
+                            <i class="fas fa-layer-group text-3xl text-blue-600 mr-6"></i>
+                            <p class="text-xl"><strong>Establecer bases modulares</strong> para la integración futura de otros módulos (formación, desempeño).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 9: Requerimientos Funcionales Clave -->
+        <section id="slide9" class="slide">
+             <div class="slide-content">
+                <h2 class="text-4xl font-black text-gray-800 text-center mb-12">Requerimientos Funcionales Clave (Prioridad Alta)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-gray-50 p-6 rounded-lg"><p class="text-lg font-semibold"><i class="fas fa-tasks text-blue-600 mr-2"></i>RF01: Registro de solicitudes de personal</p></div>
+                    <div class="bg-gray-50 p-6 rounded-lg"><p class="text-lg font-semibold"><i class="fas fa-users-cog text-blue-600 mr-2"></i>RF02: Gestión de candidatos</p></div>
+                    <div class="bg-gray-50 p-6 rounded-lg"><p class="text-lg font-semibold"><i class="fas fa-file-alt text-blue-600 mr-2"></i>RF03: Gestión de contrataciones</Fp></div>
+                    <div class="bg-gray-50 p-6 rounded-lg"><p class="text-lg font-semibold"><i class="fas fa-id-card text-blue-600 mr-2"></i>RF04: Base de datos de empleados activos</p></div>
+                    <div class="bg-gray-50 p-6 rounded-lg"><p class="text-lg font-semibold"><i class="fas fa-folder-open text-blue-600 mr-2"></i>RF07: Gestión documental centralizada</p></div>
+                    <div class="bg-gray-50 p-6 rounded-lg"><p class="text-lg font-semibold"><i class="fas fa-user-shield text-blue-600 mr-2"></i>RF09: Control de acceso por roles</p></div>
+                </div>
+             </div>
+        </section>
+        
+        <!-- Slide 10: Requerimientos No Funcionales Clave -->
+        <section id="slide10" class="slide">
+             <div class="slide-content">
+                <h2 class="text-4xl font-black text-gray-800 text-center mb-12">Requerimientos No Funcionales Clave</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-lg border-l-4 border-green-500">
+                        <ul class="list-disc list-inside space-y-4 text-lg text-gray-700">
+                            <li><strong>RNF01 (Usabilidad):</strong> Interfaz intuitiva y clara para usuarios no técnicos.</li>
+                            <li><strong>RNF02 (Disponibilidad):</strong> Sistema accesible 100% en entorno web.</li>
+                            <li><strong>RNF03 (Seguridad):</strong> Autenticación de usuarios y control de permisos por rol.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg border-l-4 border-green-500">
+                        <ul class="list-disc list-inside space-y-4 text-lg text-gray-700">
+                            <li><strong>RNF04 (Integridad):</strong> Información consistente y sin duplicados.</li>
+                            <li><strong>RNF05 (Rendimiento):</strong> Consultas y registros en menos de 3 segundos.</li>
+                            <li><strong>RNF10 (Privacidad):</strong> Cumplimiento de principios de confidencialidad de datos.</li>
+                        </ul>
+                    </div>
+                </div>
+             </div>
+        </section>
+
+        <!-- Slide 11: Arquitectura del Sistema -->
+        <section id="slide11" class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-black text-gray-800 text-center mb-12">Arquitectura Conceptual del Sistema</h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="arch-box">
+                        <i class="fas fa-user"></i> Usuario (Administrador / Sede)
+                    </div>
+                    <div class="text-center arch-arrow"><i class="fas fa-arrow-down"></i></div>
+                    <div class="arch-box">
+                        <i class="fab fa-react"></i> Interfaz Web (React) <br> <span class="font-normal text-sm">Formularios y Consultas</span>
+                    </div>
+                    <div class="text-center arch-arrow"><i class="fas fa-arrow-down"></i></div>
+                    <div class="arch-box">
+                        <i class="fas fa-cogs"></i> Backend / Lógica de Negocio <br> <span class="font-normal text-sm">(Firebase Functions o Django API)</span>
+                    </div>
+                    <div class="text-center arch-arrow"><i class="fas fa-arrows-alt-v"></i></div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="arch-box">
+                            <i class="fas fa-database"></i> Firebase Firestore <br> <span class="font-normal text-sm">(Datos Estructurados)</span>
+                        </div>
+                        <div class="arch-box">
+                            <i class="fas fa-file-pdf"></i> Firebase Storage <br> <span class="font-normal text-sm">(Archivos PDF)</span>
+                        </div>
+                    </div>
+                    <p class="text-center font-semibold text-gray-700 mt-6">+ <i class="fas fa-lock text-blue-600"></i> Firebase Authentication (Gestión de roles y acceso)</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 12: Restricciones del Proyecto -->
+        <section id="slide12" class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-black text-gray-800 text-center mb-12">Restricciones Técnicas y de Negocio</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4"><i class="fas fa-laptop-code mr-2"></i>Técnicas</h3>
+                        <ul class="list-disc list-inside space-y-3 text-lg text-gray-700">
+                            <li><strong>Tiempo de desarrollo:</strong> 1 mes (limita funciones complejas).</li>
+                            <li><strong>Tecnología:</strong> Entornos gratuitos (Firebase, React/Django).</li>
+                            <li><strong>Alcance:</strong> Enfocado en manejo de información (CRUD), no automatización avanzada.</li>
+                            <li><strong>Integración:</strong> No se conectará a sistemas externos (Nómina, ERP).</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg">
+                         <h3 class="text-2xl font-bold text-gray-800 mb-4"><i class="fas fa-briefcase mr-2"></i>De Negocio</h3>
+                        <ul class="list-disc list-inside space-y-3 text-lg text-gray-700">
+                            <li><strong>Enfoque:</strong> Prototipo académico, no productivo.</li>
+                            <li><strong>Datos:</strong> Simulación de datos (no reales) por confidencialidad.</li>
+                            <li><strong>Presupuesto:</strong> Cero.</li>
+                            <li><strong>Roles:</strong> Limitados a 2 perfiles (Administrador y Usuario Sede).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 13: Reportes: Antes vs. Después -->
+        <section id="slide13" class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-black text-gray-800 text-center mb-12">Necesidad de Información: Reportes</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-red-50 p-8 rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold text-red-800 mb-4"><i class="fas fa-times-circle mr-2"></i>Reportes Actuales</h3>
+                        <ul class="list-disc list-inside space-y-3 text-lg text-gray-700">
+                            <li>Elaborados en hojas de cálculo.</li>
+                            <li>Información dispersa.</li>
+                            <li>Consolidación manual (lenta).</li>
+                            <li>Alta probabilidad de retrasos y errores.</li>
+                            <li>Sin trazabilidad de auditoría.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 p-8 rounded-lg shadow-lg">
+                         <h3 class="text-2xl font-bold text-green-800 mb-4"><i class="fas fa-check-circle mr-2"></i>Reportes Necesarios (con CTG)</h3>
+                        <ul class="list-disc list-inside space-y-3 text-lg text-gray-700">
+                            <li>Generación automática.</li>
+                            <li>Reportes centralizados.</li>
+                            <li>Datos actualizados en tiempo real.</li>
+                            <li>Reportes trazables para auditorías.</li>
+                            <li>Generación de KPIs básicos (rotación, etc.).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 14: Criterios de Éxito -->
+        <section id="slide14" class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-black text-gray-800 text-center mb-12">Criterios de Éxito del Proyecto</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                        <h4 class="text-xl font-bold text-blue-800 mb-3"><i class="fas fa-cogs mr-2"></i>Técnico</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>Disponibilidad funcional (CRUD).</li>
+                            <li>Integridad de datos (sin duplicados).</li>
+                            <li>Rendimiento aceptable (< 3 seg).</li>
+                            <li>Seguridad por roles.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                        <h4 class="text-xl font-bold text-blue-800 mb-3"><i class="fas fa-tasks mr-2"></i>Operativo</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>Centralización efectiva.</li>
+                            <li>Reducción de reprocesos.</li>
+                            <li>Usabilidad para no técnicos.</li>
+                            <li>Trazabilidad documental.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
+                        <h4 class="text-xl font-bold text-blue-800 mb-3"><i class="fas fa-building mr-2"></i>Organizacional</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2">
+                            <li>Mejora en confiabilidad de datos.</li>
+                            <li>Reducción de tiempo en reportes.</li>
+                            <li>Cumplimiento normativo (auditorías).</li>
+                            <li>Aceptación y adopción de usuarios.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 15: Conclusiones -->
+        <section id="slide15" class="slide">
+            <div class="slide-content">
+                <h2 class="text-4xl font-black text-gray-800 text-center mb-12">Conclusiones Generales</h2>
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <div class="bg-blue-50 p-6 rounded-lg shadow-lg flex items-center">
+                        <i class="fas fa-lightbulb text-3xl text-blue-600 mr-6"></i>
+                        <p class="text-xl text-gray-800"><strong>Core Talent Genesis</strong> responde a la necesidad de <strong>modernización</strong> y control de la gestión del talento humano en AutoMás.</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg shadow-lg flex items-center">
+                        <i class="fas fa-database text-3xl text-blue-600 mr-6"></i>
+                        <p class="text-xl text-gray-800">El proyecto establece una <strong>"Fuente Única de Verdad"</strong> para la información de empleados, mejorando la coordinación y precisión.</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg shadow-lg flex items-center">
+                        <i class="fas fa-chart-line text-3xl text-blue-600 mr-6"></i>
+                        <p class="text-xl text-gray-800">Sienta las bases para una <strong>cultura de gestión basada en datos</strong>, trazabilidad y mejora continua.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Slide 16: Q&A -->
+        <section id="slide16" class="slide bg-gray-800 text-white">
+            <div class="slide-content text-center">
+                <h2 class="text-8xl font-black">Q&A</h2>
+                <p class="text-4xl mt-6">¿Preguntas?</p>
+            </div>
+        </section>
+    </div>
+
+    <button id="prevBtn" class="nav-button"><i class="fas fa-arrow-left mr-2"></i> Anterior</button>
+    <button id="nextBtn" class="nav-button">Siguiente <i class="fas fa-arrow-right ml-2"></i></button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const progressBar = document.getElementById('progressBar');
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function updateSlide() {
+                slides.forEach((slide, index) => {
+                    if (index === currentSlide) {
+                        slide.classList.add('active');
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                });
+
+                // Update progress bar
+                const progress = ((currentSlide + 1) / totalSlides) * 100;
+                progressBar.style.width = `${progress}%`;
+
+                // Update button visibility
+                prevBtn.style.display = currentSlide === 0 ? 'none' : 'block';
+                nextBtn.style.display = currentSlide === totalSlides - 1 ? 'none' : 'block';
+            }
+
+            function showNextSlide() {
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    updateSlide();
+                }
+            }
+
+            function showPrevSlide() {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    updateSlide();
+                }
+            }
+
+            nextBtn.addEventListener('click', showNextSlide);
+            prevBtn.addEventListener('click', showPrevSlide);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    showNextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    showPrevSlide();
+                }
+            });
+
+            // Initial setup
+            updateSlide();
+        });
+    </script>
+</body>
+</html>
+
