@@ -3,9 +3,6 @@ import app from './app.js';
 import sequelize from './config/database.js';
 import {config} from 'dotenv';
 
-import './models/Project.js'
-import './models/Task.js'
-
 
 config();
 

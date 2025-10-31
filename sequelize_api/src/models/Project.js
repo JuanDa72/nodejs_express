@@ -24,12 +24,17 @@ export const Project=sequelize.define('projects',{
     }
 });
 
+
+
 Project.hasMany(Task, {
-    foreignKey: 'projectId',  //Indicamos que proyecto tiene muchas tareas xd
-    sourceKey: 'id'
-})
+    foreignKey: 'projectId',
+    //Para identificar que columna vincular
+    sourceKey:'id'
+});
 
 Task.belongsTo(Project, {
     foreignKey: 'projectId',
     targetId: 'id'
 })
+
+
