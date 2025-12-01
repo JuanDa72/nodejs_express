@@ -1,0 +1,238 @@
+{
+    "info": {
+        "_postman_id": "sia-si-api-collection",
+        "name": "SIA-SI Backend API (Mallas Curriculares)",
+        "description": "API para gestionar Carreras y Materias de mallas curriculares",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Carreras",
+            "description": "Endpoints para gestionar las carreras",
+            "item": [
+                {
+                    "name": "Get All Carreras",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/carreras",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "carreras"]
+                        },
+                        "description": "Obtiene una lista de todas las carreras en la base de datos (Sistemas, Mecatrónica, Industrial)."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Carrera by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/carreras/:id",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "carreras", ":id"],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "ID de la carrera a buscar"
+                                }
+                            ]
+                        },
+                        "description": "Obtiene una carrera específica por su ID."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create Carrera",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"nombre\": \"Ingeniería Química\",\n    \"codigo_plan\": \"QUIMICA-BOG\",\n    \"creditos_totales\": 170\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/carreras",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "carreras"]
+                        },
+                        "description": "Crea una nueva carrera."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Carrera",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"nombre\": \"Ingeniería Química (Actualizada)\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/carreras/:id",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "carreras", ":id"],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "4",
+                                    "description": "ID de la carrera a actualizar"
+                                }
+                            ]
+                        },
+                        "description": "Actualiza la información de una carrera (parcial)."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Carrera",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/carreras/:id",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "carreras", ":id"],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "4",
+                                    "description": "ID de la carrera a eliminar"
+                                }
+                            ]
+                        },
+                        "description": "Elimina una carrera (y todas sus materias asociadas en cascada)."
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Materias",
+            "description": "Endpoints para gestionar las materias",
+            "item": [
+                {
+                    "name": "Get All Materias",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/materias",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "materias"]
+                        },
+                        "description": "Obtiene TODAS las materias de TODAS las carreras."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Materias by Semestre",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/materias/semestre/:semestre",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "materias", "semestre", ":semestre"],
+                            "variable": [
+                                {
+                                    "key": "semestre",
+                                    "value": "1",
+                                    "description": "Número del semestre a filtrar"
+                                }
+                            ]
+                        },
+                        "description": "Busca todas las materias (de todas las carreras) que pertenezcan a un semestre."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Materia by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/materias/:id",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "materias", ":id"],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "ID de la materia a buscar"
+                                }
+                            ]
+                        },
+                        "description": "Obtiene una materia específica por su ID."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create Materia",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"nombre\": \"Materia de Prueba\",\n    \"codigo\": \"TEST-101\",\n    \"creditos\": 3,\n    \"semestre\": 1,\n    \"tipo\": \"Profesional\",\n    \"carreraId\": 1 \n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/materias",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "materias"]
+                        },
+                        "description": "Crea una nueva materia. 'carreraId' es obligatorio y debe existir."
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Materias by Carrera ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/materias/carrera/:carreraId",
+                            "host": ["{{base_url}}"],
+                            "path": ["api", "materias", "carrera", ":carreraId"],
+                            "variable": [
+                                {
+                                    "key": "carreraId",
+                                    "value": "1",
+                                    "description": "ID de la carrera para filtrar materias"
+                                }
+                            ]
+                        },
+                        "description": "Obtiene todas las materias asociadas a una carrera específica por su ID."
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:4000",
+            "type": "string"
+        }
+    ]
+}

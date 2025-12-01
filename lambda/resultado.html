@@ -1,0 +1,48 @@
+
+  <html>
+    <head>
+      <meta charset="UTF-8"/>
+      <style>
+        body { font-family: Arial; background:#f4f4f4; padding:20px; }
+        .card {
+          background:white; padding:20px; margin:12px 0;
+          border-radius:10px; box-shadow:0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 { margin-bottom:20px; }
+        .ok { color:green; font-weight:bold; }
+        .bad { color:red; font-weight:bold; }
+      </style>
+    </head>
+    <body>
+      <h1>Resultados para google.com</h1>
+
+      <div class="card">
+        <h2>DNS Lookup</h2>
+        <p class="ok">IP: 2800:3f0:4005:404::200e (17 ms)</p>
+      </div>
+
+      <div class="card">
+        <h2>TCP (443)</h2>
+        <p class="ok">Abierto (25 ms)</p>
+      </div>
+
+      <div class="card">
+        <h2>HTTP Check</h2>
+        <p class="ok">Status: 301 (191 ms)</p>
+      </div>
+
+      <div class="card">
+        <h2>TLS</h2>
+        
+            <p class="ok">Certificado válido: true</p>
+            <p>Días restantes: 55</p>
+            <p>Issuer: Google Trust Services</p>
+            <p>Subject: *.google.com</p>
+            <p>Desde: Oct 13 08:37:33 2025 GMT</p>
+            <p>Hasta: Jan  5 08:37:32 2026 GMT</p>
+          
+      </div>
+
+    </body>
+  </html>
+  
