@@ -1,0 +1,18 @@
+# Dependencies
+/node_modules
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Build/Dist
+/dist
+
+# Docker and Databases (Muy importante si usas sqlite o guardar datos en el host)
+# Si tu base de datos está en el host (ej. db.sqlite), ignórala
+*.sqlite
+*.db
+.env
+/data/

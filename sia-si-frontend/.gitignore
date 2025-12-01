@@ -22,3 +22,21 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+
+# Build output (Vite genera esta carpeta)
+/dist
+/out
+/build
+
+# Editor/OS temporary files
+.idea/
+.vscode/
+.DS_Store
+*.log
